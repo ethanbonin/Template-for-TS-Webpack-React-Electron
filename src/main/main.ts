@@ -5,26 +5,48 @@ import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
+// Explicitly for development
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { client } from 'electron-connect';
+import MenuBuilder from '@/renderer/menu';
+
 let mainWindow: Electron.BrowserWindow | null;
 
-function createWindow(): void {
+const installExtensions = async () => {
+    const installer = require('electron-devtools-installer');
+    const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
+    const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
+
+    return Promise.all(extensions.map((name) => installer.default(installer[name], forceDownload))).catch(console.log);
+};
+
+const createWindow = async () => {
+    if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
+        await installExtensions();
+    }
+
     // Create the browser window.
     mainWindow = new BrowserWindow({
         height: 600,
         width: 800,
+        show: false,
         webPreferences: {
             webSecurity: false,
-            devTools: process.env.NODE_ENV === 'production' ? false : true
-        }
+            devTools: process.env.NODE_ENV !== 'production',
+        },
     });
+
+    // Pass your BrowserWindow object
+    client.create(mainWindow);
 
     // and load the index.html of the app.
     mainWindow.loadURL(
         url.format({
             pathname: path.join(__dirname, './index.html'),
             protocol: 'file:',
-            slashes: true
-        })
+            slashes: true,
+        }),
     );
 
     // Emitted when the window is closed.
@@ -34,6 +56,23 @@ function createWindow(): void {
         // when you should delete the corresponding element.
         mainWindow = null;
     });
+
+    mainWindow.webContents.on('did-finish-load', () => {
+        if (!mainWindow) {
+            throw new Error('"mainWindow" is not defined');
+        }
+
+        // mainWindow.webContents.send(rendererEvents.renderer.connect_app);
+        mainWindow.show();
+        mainWindow.focus();
+    });
+
+    const menuBuilder = new MenuBuilder(mainWindow);
+    menuBuilder.buildMenu();
+};
+
+if (process.env.DEBUG) {
+    app.commandLine.appendSwitch('remote-debugging-port', '9222');
 }
 
 // This method will be called when Electron has finished
