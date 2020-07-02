@@ -42,5 +42,5 @@ export const goToNextPage: AppThunk = () => async (dispatch, getState, extraArgu
 
     console.log('Extra Argument Example:', extraArgument);
 
-    return dispatch(toggleUpdateAvailable());
+    dispatch(toggleUpdateAvailable());
 };
