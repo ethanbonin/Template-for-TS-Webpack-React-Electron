@@ -2,7 +2,6 @@ import React from 'react';
 import { AppState } from '@/renderer/store';
 import { ThunkDispatch } from '@/renderer/types/redux';
 import { bindActionCreators, compose } from 'redux';
-import { goToNextPage } from '@/renderer/redux/actions/update';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { routes } from '@/renderer/constants/routes';

@@ -7,5 +7,4 @@ import { Action, ActionCreator } from 'redux';
 export type AppThunk = ActionCreator<
     ThunkAction<Promise<void> | Promise<Action>, AppState, ThunkExtraArguments, AllActions>
 >;
-// export type AppThunk = ThunkAction<void, AppState, ThunkExtraArguments, AllActions>;
 export type ThunkDispatch = TD<AppState, ThunkExtraArguments, AllActions>;

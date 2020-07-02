@@ -4,6 +4,7 @@ import { AppState } from '@/renderer/store';
 import { ThunkDispatch } from '@/renderer/types/redux';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
+import imImage from '@/renderer/resources/incept-logo-blue-text.png';
 
 export interface Props {
     updateAvailable: boolean;
@@ -14,10 +15,11 @@ export interface Props {
 const FirstPage = ({ updateDownloaded, updateAvailable, goToNextPage }: Props) => {
     return (
         <div>
+            <img src={imImage} alt={'test'} style={{ height: '50px' }} />
             <h1>First Page</h1>
             <h4>Update Available: {`${updateAvailable}`}</h4>
             <h4>Update Downloaded: {`${updateDownloaded}`}</h4>
-            <button onClick={goToNextPage}> Go to Second Page</button>
+            <button onClick={goToNextPage}>Dispatch Changes & Go to Second Page</button>
         </div>
     );
 };

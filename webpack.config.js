@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const lodash = require('lodash');
 const CopyPkgJsonPlugin = require('copy-pkg-json-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const fs = require('fs');
 
@@ -40,8 +41,9 @@ const commonConfig = {
             '@public': srcPaths('public'),
             '@renderer': srcPaths('src/renderer'),
             '@utils': srcPaths('src/utils'),
+            '@resources': srcPaths('src/renderer/resources')
         },
-        extensions: ['.js', '.json', '.ts', '.tsx'],
+        extensions: ['.js', '.json', '.ts', '.tsx', '.png'],
     },
     module: {
         rules: [
@@ -69,13 +71,6 @@ const commonConfig = {
                 test: /\.(scss|css)$/,
                 use: ['style-loader', 'css-loader'],
             },
-            {
-                test: /\.(jpg|png|svg|ico|icns)$/,
-                loader: 'file-loader',
-                options: {
-                    name: '[path][name].[ext]',
-                },
-            },
         ],
     },
 };
@@ -96,17 +91,44 @@ mainConfig.plugins = [
     }),
     ElectronReloadWebpackPlugin(),
 ];
+mainConfig.module = {
+    ...commonConfig.module,
+    rules: commonConfig.module.rules.concat([
+        {
+            test: /\.(png|svg|jpg|gif)$/,
+            use: [
+                'file-loader'
+            ]
+        }
+    ])
+}
 
 const rendererConfig = lodash.cloneDeep(commonConfig);
 rendererConfig.entry = ['./src/renderer/index.tsx'];
 rendererConfig.target = 'electron-renderer';
 rendererConfig.output.filename = 'renderer.bundle.js';
 rendererConfig.plugins = [
+    ElectronReloadWebpackPlugin(),
     new HtmlWebpackPlugin({
         template: path.resolve(__dirname, './public/index.html'),
         file: "./index.html"
     }),
-    ElectronReloadWebpackPlugin(),
+    new CopyPlugin({
+        patterns: [
+            { from: srcPaths('src/renderer/resources'), to: srcPaths('dist/resources') },
+        ],
+    }),
 ];
+rendererConfig.module = {
+    ...commonConfig.module,
+    rules: commonConfig.module.rules.concat([
+        {
+            test: /\.(png|svg|jpg|gif)$/,
+            use: [
+                'file-loader'
+            ]
+        }
+    ])
+}
 
 module.exports = [mainConfig, rendererConfig];
