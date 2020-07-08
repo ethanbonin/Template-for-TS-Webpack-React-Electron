@@ -50,3 +50,20 @@ Follow these steps when creating a new containers
 
 ## Releasing App
 - [ ] todo: Write Section
+
+
+## Tasks to complete
+- [x] Separate app and renderer
+- [x] Add linter to package json
+- [x] Add linter before committing to github
+- [ ] Write app alert component
+- [ ] Auto update package minor version when releasing
+- [ ] Create update alert when update is available
+- [ ] Write tests for reducers
+- [ ] Write tests for actions
+- [ ] Write tests for components
+- [ ] Write tests for e2e
+- [ ] Make github repo a template
+- [ ] Write out examples and How To's
+- [ ] Create gifs
+
