@@ -17,22 +17,6 @@
         "build:win": "electron-builder build --win --x64",
         "build:mac": "electron-builder build --mac --x64"
     },
-    "build": {
-        "appId": "com.devtography.electron_boilerplate",
-        "productName": "Electron+React+TypeScript Boilerplate",
-        "directories": {
-            "app": "./dist/",
-            "output": "./out/"
-        },
-        "mac": {
-            "target": "pkg"
-        },
-        "win": {
-            "target": "nsis",
-            "asar": false
-        },
-        "buildVersion": "1.0.0"
-    },
     "author": "Wing Chau @Devtography",
     "license": "MIT",
     "dependencies": {
@@ -108,7 +92,7 @@
         "webpack-cli": "^3.3.10"
     },
     "lint-staged": {
-        "*.{js,ts,tsx}": ["yarn lint"],
+        "*.{js,ts,tsx}": ["cross-env NODE_ENV=development eslint . --cache --ext .js,.jsx,.ts,.tsx"],
         "{*.json,.{babelrc,eslintrc,prettierrc,stylelintrc}}": [
             "prettier --ignore-path .eslintignore --parser json --write"
         ]
