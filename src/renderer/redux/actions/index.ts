@@ -1,4 +1,5 @@
-import { Action } from 'redux';
 import { UpdateActions } from '@/renderer/types/update';
+import { CallHistoryMethodAction } from 'connected-react-router';
+import { DialogActions } from '@renderer/types/dialog/';
 
-export type AllActions = Action<any> | Action<string> | UpdateActions;
+export type AllActions = UpdateActions | DialogActions | CallHistoryMethodAction;

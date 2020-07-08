@@ -10,10 +10,12 @@ import * as url from 'url';
 // @ts-ignore
 import { client } from 'electron-connect';
 import MenuBuilder from '@/renderer/menu';
+import ipcEvents from '@/renderer/constants/ipcEvents';
 
 let mainWindow: Electron.BrowserWindow | null;
 
 const installExtensions = async () => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const installer = require('electron-devtools-installer');
     const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
     const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
@@ -34,6 +36,7 @@ const createWindow = async () => {
         webPreferences: {
             webSecurity: false,
             devTools: process.env.NODE_ENV !== 'production',
+            nodeIntegration: true,
         },
     });
 
@@ -62,9 +65,10 @@ const createWindow = async () => {
             throw new Error('"mainWindow" is not defined');
         }
 
-        // mainWindow.webContents.send(rendererEvents.renderer.connect_app);
         mainWindow.show();
         mainWindow.focus();
+
+        mainWindow.webContents.send(ipcEvents.renderer.update_downloaded);
     });
 
     const menuBuilder = new MenuBuilder(mainWindow);
