@@ -60,12 +60,12 @@ In order to start packaging your app, you need to create a `.env.sh` file with t
 - [x] Add linter to package json
 - [x] Add linter before committing to github
 - [x] Write app alert component
-- [ ] Auto update package minor version when releasing
+- [x] Auto update package minor version when releasing
 - [ ] Create update alert when update is available
 - [ ] Add Log files
 - [ ] Write tests for reducers
 - [ ] Write tests for actions
-- [ ] Write tests for components
+- [ ] Write tests for componentsw
 - [ ] Write tests for e2e
 - [ ] Make github repo a template
 - [ ] Write out examples and How To's

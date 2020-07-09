@@ -1,18 +1,31 @@
 /**
  * Entry point of the Election app.
  */
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
+import { autoUpdater } from 'electron-updater';
+import log from 'electron-log';
 import * as path from 'path';
 import * as url from 'url';
-
+import MenuBuilder from '@/renderer/menu';
+import ipcEvents from '@/renderer/constants/ipcEvents';
 // Explicitly for development
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { client } from 'electron-connect';
-import MenuBuilder from '@/renderer/menu';
-import ipcEvents from '@/renderer/constants/ipcEvents';
 
+console.log = log.log;
 let mainWindow: Electron.BrowserWindow | null;
+
+export default class AppUpdater {
+    constructor() {
+        log.transports.file.level = 'info';
+        autoUpdater.logger = log;
+        setTimeout(function () {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const _ = autoUpdater.checkForUpdatesAndNotify();
+        }, 10000);
+    }
+}
 
 const installExtensions = async () => {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -74,12 +87,13 @@ const createWindow = async () => {
 
         mainWindow.show();
         mainWindow.focus();
-
-        mainWindow.webContents.send(ipcEvents.renderer.update_downloaded);
     });
 
     const menuBuilder = new MenuBuilder(mainWindow);
     menuBuilder.buildMenu();
+
+    // Remove this if your app does not use auto updates
+    new AppUpdater();
 };
 
 if (process.env.DEBUG) {
@@ -108,5 +122,23 @@ app.on('activate', () => {
     }
 });
 
-// In this file you can include the rest of your app"s specific main process
-// code. You can also put them in separate files and require them here.
+/**
+ * New Update Available
+ * */
+autoUpdater.on('update-available', () => {
+    console.log('AutoUpdated: Update Available');
+    mainWindow?.webContents.send(ipcEvents.renderer.update_available);
+});
+
+/*Download Completion Message*/
+autoUpdater.on('update-downloaded', () => {
+    console.log('AutoUpdated: Update Downloaded');
+    mainWindow?.webContents.send(ipcEvents.renderer.update_downloaded);
+});
+
+/**
+ *  IPC Event Listeners
+ * */
+ipcMain.on(ipcEvents.main.restart_app, () => {
+    autoUpdater.quitAndInstall();
+});
