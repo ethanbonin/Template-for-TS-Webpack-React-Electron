@@ -4,6 +4,8 @@ import { UPDATE_AVAILABLE, UPDATE_DOWNLOADED } from '@renderer/types/update/';
 import { routes } from '@/renderer/constants/routes';
 import { showDialog } from '@/renderer/redux/actions/dialog';
 import { DialogBoxType, DialogProperties } from '@renderer/types/dialog/';
+import ipcEvents from '@/renderer/constants/ipcEvents';
+import { ipcRenderer } from 'electron';
 
 export const updateAvailable: AppThunk = () => async (dispatch) => {
     const dialogOptions: DialogProperties = {
@@ -38,7 +40,7 @@ export const updateDownloaded: AppThunk = () => async (dispatch) => {
     showDialog(dialogOptions, (response) => {
         if (response.response === 0) {
             console.log('restart app!');
-            // TODO: Send notificatio to restart app
+            ipcRenderer.send(ipcEvents.main.restart_app);
         }
     });
 
