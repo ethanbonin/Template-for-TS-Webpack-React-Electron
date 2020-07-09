@@ -1,6 +1,6 @@
 {
     "name": "electron-react-typescript-webpack-boilerplate",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Pre-configured boilerplate for Electron + React + TypeScript",
     "repository": {
         "type": "git",
@@ -21,7 +21,8 @@
         "release:windows": "cross-env GH_TOKEN=%GH_TOKEN% electron-builder build --win --publish always",
         "release:mac": "electron-builder build --mac --x64 --publish always",
         "release": "electron-builder build --mac --x64 --win --publish always",
-        "set-env": "sh .env.sh",
+        "set-env": "sh .env.sh && yarn echo",
+        "echo": "echo %GH_TOKEN%",
         "test": "mocha -r ts-node/register -r tsconfig-paths/register \"test/**/*.ts\"",
         "version-increase": "yarn version --patch"
     },
