@@ -31,7 +31,8 @@ export const updateDownloaded: AppThunk = () => async (dispatch) => {
         defaultId: 0,
         buttons: ['Restart App', 'Later'],
         message: 'New update finished downloading. Restart App?',
-        detail: 'You will need to restart the app to get the new update. Restart now?',
+        detail:
+            'You will need to restart the app to get the new update. Restart now?',
     };
 
     showDialog(dialogOptions, (response) => {
@@ -46,7 +47,11 @@ export const updateDownloaded: AppThunk = () => async (dispatch) => {
     });
 };
 
-export const goToNextPage: AppThunk = () => async (dispatch, getState, extraArgument) => {
+export const goToNextPage: AppThunk = () => async (
+    dispatch,
+    getState,
+    extraArgument,
+) => {
     const state = getState();
     const { update } = state;
 

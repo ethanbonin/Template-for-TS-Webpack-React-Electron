@@ -5,7 +5,10 @@ import { MessageBoxOptions, MessageBoxReturnValue } from 'electron';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { dialog } = require('electron').remote;
 
-export const showDialog = (dialogOptions: DialogProperties, callBack: (response: MessageBoxReturnValue) => void) => {
+export const showDialog = (
+    dialogOptions: DialogProperties,
+    callBack: (response: MessageBoxReturnValue) => void,
+) => {
     // Set the dialog properties first
 
     const options: MessageBoxOptions = { ...dialogOptions };
@@ -15,7 +18,9 @@ export const showDialog = (dialogOptions: DialogProperties, callBack: (response:
     });
 };
 
-export const setDialogProperties: AppThunk = (dialogOptions: DialogProperties) => async (dispatch) => {
+export const setDialogProperties: AppThunk = (
+    dialogOptions: DialogProperties,
+) => async (dispatch) => {
     return dispatch({
         type: SHOW_DIALOG,
         dialogProperties: dialogOptions,

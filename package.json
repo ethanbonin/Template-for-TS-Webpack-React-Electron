@@ -1,26 +1,37 @@
 {
     "name": "electron-react-typescript-webpack-boilerplate",
-    "version": "2.0.2",
+    "version": "1.0.2",
     "description": "Pre-configured boilerplate for Electron + React + TypeScript",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Devtography/electron-react-typescript-webpack-boilerplate"
+        "url": "https://github.com/ethanbonin/Template-for-TS-Webpack-React-Electron.git"
     },
     "homepage": "https://inceptmedical.com",
     "main": "./dist/main.bundle.js",
     "scripts": {
-        "debug": "rimraf dist && cross-env NODE_ENV=development DEBUG=true webpack --watch --progress --colors",
-        "dev": "rimraf dist && cross-env NODE_ENV=development webpack --watch --progress --colors",
-        "prod": "rimraf dist && cross-env NODE_ENV=production webpack --progress --colors",
-        "test": "mocha -r ts-node/register -r tsconfig-paths/register \"test/**/*.ts\"",
+        "clean-dist": "rimraf dist",
+        "build": "yarn clean-dist && cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progress --colors",
+
+        "dev": "yarn clean-dist && cross-env NODE_ENV=development webpack --config webpack.config.dev.js --watch --progress --colors",
         "lint": "cross-env NODE_ENV=development eslint . --cache --ext .js,.jsx,.ts,.tsx",
-        "build:win": "electron-builder build --win --x64",
-        "build:mac": "electron-builder build --mac --x64"
+        "lint-fix": "cross-env NODE_ENV=development eslint . --cache --ext  .js,.jsx,.ts,.tsx --fix",
+        "package": "yarn set-env && yarn build && yarn version-increase && yarn release --publish always",
+        "package:windows": "yarn set-env && yarn build && yarn version-increase && yarn release:windows",
+        "package:mac": "yarn set-env && yarn build && yarn version-increase && yarn release:mac",
+        "prod": "yarn clean-dist && cross-env NODE_ENV=production webpack --config webpack.config.dev.js --progress --colors",
+        "release:windows": "cross-env GH_TOKEN=%GH_TOKEN% electron-builder build --win --publish always",
+        "release:mac": "electron-builder build --mac --x64 --publish always",
+        "release": "electron-builder build --mac --x64 --win --publish always",
+        "set-env": "sh .env.sh",
+        "test": "mocha -r ts-node/register -r tsconfig-paths/register \"test/**/*.ts\"",
+        "version-increase": "yarn version --patch"
     },
-    "author": "Wing Chau @Devtography",
+    "author": "Ethan BOnin",
     "license": "MIT",
     "dependencies": {
         "connected-react-router": "^6.8.0",
+        "env-cmd": "^10.1.0",
+        "global": "^4.4.0",
         "react": "^16.12.0",
         "react-dom": "^16.13.1",
         "react-redux": "^7.2.0",
@@ -92,7 +103,9 @@
         "webpack-cli": "^3.3.10"
     },
     "lint-staged": {
-        "*.{js,ts,tsx}": ["cross-env NODE_ENV=development eslint . --cache --ext .js,.jsx,.ts,.tsx"],
+        "*.{js,ts,tsx}": [
+            "cross-env NODE_ENV=development eslint . --cache --ext .js,.jsx,.ts,.tsx"
+        ],
         "{*.json,.{babelrc,eslintrc,prettierrc,stylelintrc}}": [
             "prettier --ignore-path .eslintignore --parser json --write"
         ]

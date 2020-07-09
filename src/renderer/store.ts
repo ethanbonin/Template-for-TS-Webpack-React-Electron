@@ -1,5 +1,10 @@
 import { createHashHistory } from 'history';
-import { applyMiddleware, compose, createStore, StoreEnhancerStoreCreator } from 'redux';
+import {
+    applyMiddleware,
+    compose,
+    createStore,
+    StoreEnhancerStoreCreator,
+} from 'redux';
 import thunk, { ThunkMiddleware } from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createRootReducer from '@/renderer/redux/reducers/index';
@@ -18,13 +23,19 @@ export type AppState = ReturnType<typeof rootReducer>;
 export default function configureStore(preloadedState?: AppState) {
     const middlewares = [routerMiddleware(history)];
 
-    middlewares.push(thunk.withExtraArgument({ extraAddedArgumentExample: 'Example Argument!' }));
+    middlewares.push(
+        thunk.withExtraArgument({
+            extraAddedArgumentExample: 'Example Argument!',
+        }),
+    );
 
     const middlewareEnhancer = applyMiddleware(...middlewares);
 
     const enhancers = [middlewareEnhancer];
 
-    const composedEnhancers = compose<StoreEnhancerStoreCreator<unknown, unknown>>(...enhancers);
+    const composedEnhancers = compose<
+        StoreEnhancerStoreCreator<unknown, unknown>
+    >(...enhancers);
 
     return createStore(rootReducer, preloadedState, composedEnhancers);
 }

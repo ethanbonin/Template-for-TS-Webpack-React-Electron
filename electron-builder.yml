@@ -9,13 +9,8 @@ directories:
 asar: true
 
 files:
-  - 'dist/'
-  - 'node_modules/'
-  - 'app.html'
-  - 'main.prod.js'
-  - 'main.prod.js.map'
-  - 'app/**/*'
-  - 'package.json'
+   - 'dist/**/*'
+   - 'node_modules/'
 
 win:
   target:
@@ -29,6 +24,4 @@ nsis:
 publish:
   provider: 'github'
   private: false
-  owner: 'inceptmedical'
-  token: '3981290f68feae941b0d7db45f6b6f4cbfac6d0d'
   releaseType: 'release'

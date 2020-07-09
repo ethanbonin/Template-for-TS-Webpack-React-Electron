@@ -48,6 +48,9 @@ Follow these steps when creating a new containers
 ## Build and Packing App
 - [ ] todo: Write Section
 
+## Env for publishing
+In order to start packaging your app, you need to create a `.env.sh` file with the parameter & set the GH_TOKEN variable.
+
 ## Releasing App
 - [ ] todo: Write Section
 
@@ -56,9 +59,10 @@ Follow these steps when creating a new containers
 - [x] Separate app and renderer
 - [x] Add linter to package json
 - [x] Add linter before committing to github
-- [ ] Write app alert component
+- [x] Write app alert component
 - [ ] Auto update package minor version when releasing
 - [ ] Create update alert when update is available
+- [ ] Add Log files
 - [ ] Write tests for reducers
 - [ ] Write tests for actions
 - [ ] Write tests for components

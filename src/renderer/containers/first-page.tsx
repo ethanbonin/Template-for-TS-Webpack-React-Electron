@@ -12,14 +12,20 @@ export interface Props {
     goToNextPage: () => void;
 }
 
-const FirstPage = ({ updateDownloaded, updateAvailable, goToNextPage }: Props) => {
+const FirstPage = ({
+    updateDownloaded,
+    updateAvailable,
+    goToNextPage,
+}: Props) => {
     return (
         <div>
             <img src={imImage} alt={'test'} style={{ height: '50px' }} />
             <h1>First Page</h1>
             <h4>Update Available: {`${updateAvailable}`}</h4>
             <h4>Update Downloaded: {`${updateDownloaded}`}</h4>
-            <button onClick={goToNextPage}>Dispatch Changes & Go to Second Page</button>
+            <button onClick={goToNextPage}>
+                Dispatch Changes & Go to Second Page
+            </button>
         </div>
     );
 };
@@ -40,5 +46,7 @@ function mapDispatchToProps(dispatch: ThunkDispatch) {
     );
 }
 
-const enhance = compose<React.ComponentType>(connect(mapStateToProps, mapDispatchToProps));
+const enhance = compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+);
 export default enhance(FirstPage);

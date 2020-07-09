@@ -24,11 +24,17 @@ module.exports = {
         'no-restricted-imports': [
             'error',
             {
-                patterns: ['@material-ui/*/*/*', '!@material-ui/core/test-utils/*'],
+                patterns: [
+                    '@material-ui/*/*/*',
+                    '!@material-ui/core/test-utils/*',
+                ],
             },
         ],
         'react/jsx-uses-react': 'error',
         'react/jsx-uses-vars': 'error',
-        '@typescript-eslint/explicit-module-boundary-types': ['off', { allowTypedFunctionExpressions: true }],
+        '@typescript-eslint/explicit-module-boundary-types': [
+            'off',
+            { allowTypedFunctionExpressions: true },
+        ],
     },
 };

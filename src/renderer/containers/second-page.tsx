@@ -34,5 +34,7 @@ function mapDispatchToProps(dispatch: ThunkDispatch) {
     return bindActionCreators({}, dispatch);
 }
 
-const enhance = compose<React.ComponentType>(connect(mapStateToProps, mapDispatchToProps));
+const enhance = compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+);
 export default enhance(SecondPage);
