@@ -1,0 +1,34 @@
+productName: 'Template Electron App'
+appId: 'com.example-product.template'
+
+directories:
+  buildResources: 'resources'
+  output: 'releases'
+
+# Package electron code into a asar archive. Set to false to debug issues.
+asar: true
+
+files:
+  - 'dist/'
+  - 'node_modules/'
+  - 'app.html'
+  - 'main.prod.js'
+  - 'main.prod.js.map'
+  - 'app/**/*'
+  - 'package.json'
+
+win:
+  target:
+    - 'zip'
+    - 'nsis'
+  #icon: "src/app/assets/images/icon.ico"
+
+nsis:
+  oneClick: false
+
+publish:
+  provider: 'github'
+  private: false
+  owner: 'inceptmedical'
+  token: '3981290f68feae941b0d7db45f6b6f4cbfac6d0d'
+  releaseType: 'release'
