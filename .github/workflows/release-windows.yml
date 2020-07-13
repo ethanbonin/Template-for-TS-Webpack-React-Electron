@@ -1,0 +1,31 @@
+name: Release Windows
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v1
+
+      - name: install node, yarn
+        uses: actions/setup-node@v1
+        with:
+          node-version: 13
+
+      - name: yarn install
+        run: |
+          yarn install
+      - name: yarn release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          yarn package:windows
