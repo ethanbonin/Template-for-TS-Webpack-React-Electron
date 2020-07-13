@@ -83,7 +83,7 @@ In order to start packaging your app, you need to create a `.env.sh` file with t
 -   [x] Create github actions for master, then release.
 -   [x] fix bugs - TCP Errors?
 -   [x] Write tests for reducers
--   [ ] Write tests for actions
+-   [x] Write tests for actions
 -   [ ] Write tests for components
 -   [ ] Write tests for e2e
 -   [ ] Ensure tests work for github actions workflow for pull requests
