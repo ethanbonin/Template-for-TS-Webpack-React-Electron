@@ -1,5 +1,5 @@
-import update from '../../src/renderer/redux/reducers/update';
-import { UPDATE_AVAILABLE, UPDATE_DOWNLOADED } from '@/renderer/types/update/';
+import update from '@/renderer/redux/reducers/update';
+import { UPDATE_AVAILABLE, UPDATE_DOWNLOADED } from '@/renderer/types/update';
 
 describe('update reducer', () => {
     it('should handle initial state', () => {

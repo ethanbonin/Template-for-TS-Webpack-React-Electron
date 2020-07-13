@@ -55,6 +55,8 @@ export const goToNextPage: AppThunk = () => async (
     extraArgument,
 ) => {
     const state = getState();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const { update } = state;
 
     console.log('State Example: { update }', update);
