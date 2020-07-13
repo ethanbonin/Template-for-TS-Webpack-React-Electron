@@ -84,7 +84,8 @@ In order to start packaging your app, you need to create a `.env.sh` file with t
 -   [x] fix bugs - TCP Errors?
 -   [x] Write tests for reducers
 -   [ ] Write tests for actions
--   [ ] Write tests for componentsw
+-   [ ] Write tests for components
 -   [ ] Write tests for e2e
+-   [ ] Ensure tests work for github actions workflow for pull requests
 -   [ ] Write out examples and How To's
 -   [ ] Create gifs
