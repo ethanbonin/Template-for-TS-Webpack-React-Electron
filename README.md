@@ -64,8 +64,8 @@ In order to start packaging your app, you need to create a `.env.sh` file with t
 - [x] Make github repo a template
 - [x] Create update alert when update is available
 - [x] Add Log files
-- [ ] Create github actions for auto testing and release.
-- [ ] Create github actions for master, then release.
+- [x] Create github actions for auto testing and release.
+- [x] Create github actions for master, then release.
 - [ ] fix bugs - TCP Errors?
 - [ ] Write tests for reducers
 - [ ] Write tests for actions
