@@ -24,7 +24,7 @@ jobs:
       - name: yarn install
         run: |
           yarn install
-      - name: yarn release
+      - name: yarn package:windows
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
