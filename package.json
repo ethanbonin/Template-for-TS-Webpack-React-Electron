@@ -16,7 +16,7 @@
         "lint-fix": "cross-env NODE_ENV=development eslint . --cache --ext  .js,.jsx,.ts,.tsx --fix",
         "package": "yarn set-env && yarn build && yarn version-increase && yarn release --publish always",
         "package:windows": "yarn set-env && yarn build && yarn version-increase && yarn release:windows",
-        "package:mac": "yarn set-env && yarn build && yarn version-increase && yarn release:mac",
+        "package:mac": "yarn build && yarn version-increase && yarn release:mac",
         "prod": "yarn clean-dist && cross-env NODE_ENV=production webpack --config webpack.config.dev.js --progress --colors",
         "release:windows": "cross-env GH_TOKEN=%GH_TOKEN% electron-builder build --win --publish always",
         "release:mac": "electron-builder build --mac --x64 --publish always",
