@@ -20,7 +20,7 @@ const FirstPage = ({
     return (
         <div>
             <img src={imImage} alt={'test'} style={{ height: '50px' }} />
-            <h1>First Page</h1>
+            <h1>First Page duh</h1>
             <h4>Update Available: {`${updateAvailable}`}</h4>
             <h4>Update Downloaded: {`${updateDownloaded}`}</h4>
             <button onClick={goToNextPage}>

@@ -1,6 +1,6 @@
 {
     "name": "electron-react-typescript-webpack-boilerplate",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Pre-configured boilerplate for Electron + React + TypeScript",
     "repository": {
         "type": "git",
@@ -16,10 +16,11 @@
         "dev": "yarn clean-dist && cross-env NODE_ENV=development webpack --config webpack.config.dev.js --watch --progress --colors",
         "lint": "cross-env NODE_ENV=development eslint . --cache --ext .js,.jsx,.ts,.tsx",
         "lint-fix": "cross-env NODE_ENV=development eslint . --cache --ext  .js,.jsx,.ts,.tsx --fix",
+        "package-debug": "yarn clean-dist && cross-env NODE_ENV=production DEBUG_PROD=true webpack --config webpack.config.prod.js --progress --colors && electron-builder build --win",
         "package": "yarn config-git && yarn version-increase && yarn build && yarn release --publish always",
         "package:windows": "yarn config-git && yarn version-increase && yarn build && yarn release:windows",
         "package:mac": "yarn config-git && yarn version-increase && yarn build && yarn release:mac",
-        "prod": "yarn clean-dist && cross-env NODE_ENV=production webpack --config webpack.config.dev.js --progress --colors",
+        "prod": "yarn clean-dist && cross-env NODE_ENV=production DEBUG_PROD=true webpack --config webpack.config.prod.js --progress --colors --watch",
         "release:windows": "cross-env GH_TOKEN=%GH_TOKEN% electron-builder build --win --publish always",
         "release:mac": "electron-builder build --mac --x64 --publish always",
         "release": "electron-builder build --mac --x64 --win --publish always",
@@ -86,6 +87,7 @@
         "lint-staged": "^10.2.11",
         "lodash": "^4.17.15",
         "mocha": "^8.0.1",
+        "post-compile-webpack-plugin": "^0.1.2",
         "prettier": "^2.0.5",
         "redux-devtools-extension": "^2.13.8",
         "rimraf": "^3.0.2",

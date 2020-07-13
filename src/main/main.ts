@@ -8,11 +8,6 @@ import * as path from 'path';
 import * as url from 'url';
 import MenuBuilder from '@/renderer/menu';
 import ipcEvents from '@/renderer/constants/ipcEvents';
-// Explicitly for development
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { client } from 'electron-connect';
-
 console.log = log.log;
 let mainWindow: Electron.BrowserWindow | null;
 
@@ -61,7 +56,14 @@ const createWindow = async () => {
     });
 
     // Pass your BrowserWindow object
-    client.create(mainWindow);
+    if (process.env.NODE_ENV === 'development') {
+        // Explicitly for development
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const client = require('electron-connect').client;
+        client.create(mainWindow);
+    } else {
+        console.log('ITS PRODUCTION!');
+    }
 
     // and load the index.html of the app.
     mainWindow.loadURL(
@@ -96,7 +98,7 @@ const createWindow = async () => {
     new AppUpdater();
 };
 
-if (process.env.DEBUG) {
+if (process.env.NODE_ENV === 'development') {
     app.commandLine.appendSwitch('remote-debugging-port', '9222');
 }
 

@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const lodash = require('lodash');
 const CopyPkgJsonPlugin = require('copy-pkg-json-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PostCompile = require('post-compile-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const fs = require('fs');
@@ -22,6 +23,7 @@ const ElectronReloadWebpackPlugin = createElectronReloadWebpackPlugin({
     // or just `path: './'`,
     // Other 'electron-connect' options
     logLevel: 0,
+    stopOnClose: true
 });
 
 const isEnvProduction = process.env.NODE_ENV === 'production';
@@ -108,7 +110,6 @@ rendererConfig.entry = ['./src/renderer/index.tsx'];
 rendererConfig.target = 'electron-renderer';
 rendererConfig.output.filename = 'renderer.bundle.js';
 rendererConfig.plugins = [
-    ElectronReloadWebpackPlugin(),
     new HtmlWebpackPlugin({
         template: path.resolve(__dirname, './public/index.html'),
         file: "./index.html"
@@ -118,6 +119,7 @@ rendererConfig.plugins = [
             { from: srcPaths('src/renderer/resources'), to: srcPaths('dist/resources') },
         ],
     }),
+    ElectronReloadWebpackPlugin()
 ];
 rendererConfig.module = {
     ...commonConfig.module,
