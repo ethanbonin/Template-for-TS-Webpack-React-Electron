@@ -18,7 +18,6 @@ export default function update(
         case UPDATE_AVAILABLE:
             return { ...state, updateAvailable: !state.updateAvailable };
         case UPDATE_DOWNLOADED:
-            console.log('UPDATE_DOWNLOADED');
             return { ...state, updateDownloaded: !state.updateDownloaded };
         default:
             return state;

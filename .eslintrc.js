@@ -5,7 +5,7 @@ module.exports = {
         ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
         sourceType: 'module', // Allows for the use of imports
     },
-    plugins: ['@typescript-eslint'],
+    plugins: ['@typescript-eslint', 'jest'],
     extends: [
         'plugin:react/recommended',
         'eslint:recommended',
@@ -16,6 +16,7 @@ module.exports = {
     ignorePatterns: ['node_modules', 'build', 'coverage'],
     env: {
         node: true,
+        'jest/globals': true,
     },
     rules: {
         // A temporary hack related to IDE not resolving correct package.json
@@ -36,5 +37,10 @@ module.exports = {
             'off',
             { allowTypedFunctionExpressions: true },
         ],
+        'jest/no-disabled-tests': 'warn',
+        'jest/no-focused-tests': 'error',
+        'jest/no-identical-title': 'error',
+        'jest/prefer-to-have-length': 'warn',
+        'jest/valid-expect': 'error',
     },
 };

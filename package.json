@@ -37,6 +37,7 @@
         "electron-updater": "^4.3.1",
         "env-cmd": "^10.1.0",
         "global": "^4.4.0",
+        "identity-obj-proxy": "^3.0.0",
         "react": "^16.12.0",
         "react-dom": "^16.13.1",
         "react-redux": "^7.2.0",
@@ -52,6 +53,9 @@
         "@babel/preset-env": "^7.10.3",
         "@babel/preset-react": "^7.10.4",
         "@babel/preset-typescript": "^7.10.1",
+        "@types/enzyme": "^3.10.5",
+        "@types/enzyme-adapter-react-16": "^1.0.6",
+        "@types/jest": "^26.0.4",
         "@types/mocha": "^7.0.2",
         "@types/react": "^16.9.41",
         "@types/react-dom": "^16.9.8",
@@ -72,18 +76,24 @@
         "electron-connect": "^0.6.3",
         "electron-devtools-installer": "^3.1.0",
         "electron-reload-webpack-plugin": "^2.0.4",
-        "eslint": "^7.3.1",
+        "enzyme": "^3.11.0",
+        "enzyme-adapter-react-16": "^1.15.2",
+        "enzyme-to-json": "^3.5.0",
+        "eslint": "^7.4.0",
         "eslint-config-airbnb": "^18.2.0",
         "eslint-config-prettier": "^6.11.0",
         "eslint-import-resolver-webpack": "^0.12.2",
         "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-jest": "^23.18.0",
         "eslint-plugin-jsx-a11y": "^6.2.3",
         "eslint-plugin-prettier": "^3.1.4",
         "eslint-plugin-react": "^7.20.2",
+        "eslint-plugin-testcafe": "^0.2.1",
         "file-loader": "^6.0.0",
         "html-loader": "^1.1.0",
         "html-webpack-plugin": "^4.3.0",
         "husky": "^4.2.5",
+        "jest": "^26.1.0",
         "lint-staged": "^10.2.11",
         "lodash": "^4.17.15",
         "mocha": "^8.0.1",
@@ -98,6 +108,9 @@
         "stylelint-config-prettier": "^8.0.2",
         "stylelint-config-standard": "^20.0.0",
         "stylelint-prettier": "^1.1.2",
+        "testcafe": "^1.8.8",
+        "testcafe-browser-provider-electron": "^0.0.15",
+        "testcafe-react-selectors": "^4.0.0",
         "ts-loader": "^7.0.5",
         "ts-node": "^8.10.2",
         "tsconfig-paths": "^3.9.0",
@@ -114,6 +127,13 @@
         ],
         "{*.json,.{babelrc,eslintrc,prettierrc,stylelintrc}}": [
             "prettier --ignore-path .eslintignore --parser json --write"
+        ],
+        "*.{css,scss}": [
+            "stylelint --ignore-path .eslintignore --syntax scss --fix",
+            "prettier --ignore-path .eslintignore --single-quote --write"
+        ],
+        "*.{html,md,yml}": [
+            "prettier --ignore-path .eslintignore --single-quote --write"
         ]
     },
     "husky": {
@@ -123,5 +143,16 @@
     },
     "renovate": {
         "extends": ["bliss"]
+    },
+    "jest": {
+        "modulePaths": ["src", "node_modules"],
+        "moduleFileExtensions": ["js", "jsx", "ts", "tsx", "json"],
+        "moduleNameMapper": {
+            "^@/(.*)$": "<rootDir>/src/$1",
+            "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tests/fileMock.js",
+            "\\.(css|less|sass|scss)$": "identity-obj-proxy"
+        },
+        "moduleDirectories": ["src", "node_modules"],
+        "setupFiles": ["./tests/setupTests.ts"]
     }
 }

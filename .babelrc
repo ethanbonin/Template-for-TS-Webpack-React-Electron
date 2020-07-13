@@ -1,7 +1,17 @@
 {
-  "presets": ["@babel/env", "@babel/typescript", "@babel/preset-react"],
-  "plugins": [
-    "@babel/proposal-class-properties",
-    "@babel/proposal-object-rest-spread"
-  ]
+    "presets": [
+        "@babel/typescript",
+        "@babel/preset-react",
+        "@babel/preset-env"
+    ],
+    "plugins": [
+        "@babel/proposal-class-properties",
+        "@babel/proposal-object-rest-spread",
+        "syntax-dynamic-import"
+    ],
+    "env": {
+        "test": {
+            "plugins": ["dynamic-import-node"]
+        }
+    }
 }
