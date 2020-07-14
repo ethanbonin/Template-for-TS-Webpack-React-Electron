@@ -1,31 +1,51 @@
 import React from 'react';
-import { goToNextPage } from '@/renderer/redux/actions/update';
+import { goToNextPage } from '@/renderer/redux/actions/routing';
 import { AppState } from '@/renderer/store';
 import { ThunkDispatch } from '@/renderer/types/redux';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
-import imImage from '@/renderer/resources/incept-logo-blue-text.png';
+import { routes } from '@/renderer/constants/routes';
+import {
+    IFirstPageScene,
+    FirstPageScene,
+} from '@/renderer/constants/scenes/firstPageScene';
+import Index from '@/renderer/components/button/button';
+import Label from '@/renderer/components/label/label';
 
 export interface Props {
     updateAvailable: boolean;
     updateDownloaded: boolean;
-    goToNextPage: () => void;
+    goToNextPage: (page: string) => void;
+    firstPageScene: IFirstPageScene;
 }
 
 const FirstPage = ({
     updateDownloaded,
     updateAvailable,
     goToNextPage,
+    firstPageScene,
 }: Props) => {
     return (
         <div>
-            <img src={imImage} alt={'test'} style={{ height: '50px' }} />
-            <h1>First Page duh</h1>
-            <h4>Update Available: {`${updateAvailable}`}</h4>
-            <h4>Update Downloaded: {`${updateDownloaded}`}</h4>
-            <button onClick={goToNextPage}>
-                Dispatch Changes & Go to Second Page
-            </button>
+            <img
+                id={firstPageScene.logo.id}
+                src={firstPageScene.logo.src}
+                alt={firstPageScene.logo.alt}
+                style={{ height: '50px' }}
+            />
+            <Label label={firstPageScene.title} />
+            <Label
+                label={firstPageScene.updateLabel}
+                additionalText={`${updateAvailable}`}
+            />
+            <Label
+                label={firstPageScene.downloadLabel}
+                additionalText={`${updateDownloaded}`}
+            />
+            <Index
+                action={() => goToNextPage(routes.secondPage)}
+                buttonProperties={firstPageScene.button}
+            />
         </div>
     );
 };
@@ -34,6 +54,7 @@ function mapStateToProps(state: AppState) {
     return {
         updateAvailable: state.update.updateAvailable,
         updateDownloaded: state.update.updateDownloaded,
+        firstPageScene: FirstPageScene,
     };
 }
 

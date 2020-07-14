@@ -32,3 +32,5 @@ node_modules
 
 # Built app
 dist/**/*
+
+webpack.config.*

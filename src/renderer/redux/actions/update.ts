@@ -1,7 +1,5 @@
-import { push } from 'connected-react-router';
 import { AppThunk } from '@/renderer/types/redux';
 import { UPDATE_AVAILABLE, UPDATE_DOWNLOADED } from '@renderer/types/update/';
-import { routes } from '@/renderer/constants/routes';
 import { showDialog } from '@/renderer/redux/actions/dialog';
 import { DialogBoxType, DialogProperties } from '@renderer/types/dialog/';
 import ipcEvents from '@/renderer/constants/ipcEvents';
@@ -47,21 +45,4 @@ export const updateDownloaded: AppThunk = () => async (dispatch) => {
     return dispatch({
         type: UPDATE_DOWNLOADED,
     });
-};
-
-export const goToNextPage: AppThunk = () => async (
-    dispatch,
-    getState,
-    extraArgument,
-) => {
-    const state = getState();
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const { update } = state;
-
-    console.log('State Example: { update }', update);
-    console.log('Extra Argument Example:', extraArgument);
-
-    dispatch(updateAvailable());
-    dispatch(push(routes.secondPage));
 };

@@ -12,15 +12,15 @@
         "clean-dist": "rimraf dist",
         "config-git-actions": "yarn config set version-sign-git-tag false && yarn config set version-git-tag false && yarn config set version-commit-hooks false",
         "config-git": "git config --global user.email \"ethanbonin@gmail.com\" && git config --global user.name \"GITHUB ACTIONS\" && yarn config-git-actions",
-        "build": "yarn clean-dist && cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progress --colors",
-        "dev": "yarn clean-dist && cross-env NODE_ENV=development webpack --config webpack.config.dev.js --watch --progress --colors",
+        "build": "yarn clean-dist && cross-env NODE_ENV=production webpack --config webpack-config/webpack.config.js --progress --colors",
+        "dev": "yarn clean-dist && cross-env NODE_ENV=development webpack --config webpack-config/webpack.config.js --watch --progress --colors",
         "lint": "cross-env NODE_ENV=development eslint . --cache --ext .js,.jsx,.ts,.tsx",
         "lint-fix": "cross-env NODE_ENV=development eslint . --cache --ext  .js,.jsx,.ts,.tsx --fix",
-        "package-debug": "yarn clean-dist && cross-env NODE_ENV=production DEBUG_PROD=true webpack --config webpack.config.prod.js --progress --colors && electron-builder build --win",
+        "package-debug": "yarn clean-dist && cross-env NODE_ENV=production DEBUG_PROD=true webpack --config webpack-config/webpack.config.js --progress --colors && electron-builder build --win",
         "package": "yarn config-git && yarn version-increase && yarn build && yarn release --publish always",
         "package:windows": "yarn config-git && yarn version-increase && yarn build && yarn release:windows",
         "package:mac": "yarn config-git && yarn version-increase && yarn build && yarn release:mac",
-        "prod": "yarn clean-dist && cross-env NODE_ENV=production DEBUG_PROD=true webpack --config webpack.config.prod.js --progress --colors --watch",
+        "prod": "yarn clean-dist && cross-env NODE_ENV=production DEBUG_PROD=true webpack --config webpack-config/webpack.config.js --progress --colors --watch",
         "release:windows": "cross-env GH_TOKEN=%GH_TOKEN% electron-builder build --win --publish always",
         "release:mac": "electron-builder build --mac --x64 --publish always",
         "release": "electron-builder build --mac --x64 --win --publish always",
@@ -127,7 +127,8 @@
         "typescript": "^3.7.2",
         "url-loader": "^4.1.0",
         "webpack": "^4.41.2",
-        "webpack-cli": "^3.3.10"
+        "webpack-cli": "^3.3.10",
+        "webpack-merge": "^5.0.9"
     },
     "lint-staged": {
         "*.{js,ts,tsx}": [
