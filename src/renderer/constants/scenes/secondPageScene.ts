@@ -1,10 +1,12 @@
-import Label, { HeaderVariants } from '@/renderer/types/components/label';
+import LabelProperties, {
+    HeaderVariants,
+} from '@/renderer/types/components/labelProperties';
 import ButtonProperties from '@/renderer/types/components/buttonProperties';
 
 export interface ISecondPageScene {
-    title: Label;
-    updateAvailable: Label;
-    downloadAvailable: Label;
+    title: LabelProperties;
+    updateAvailable: LabelProperties;
+    downloadAvailable: LabelProperties;
     button: ButtonProperties;
 }
 

@@ -43,10 +43,12 @@ describe('<Button />', () => {
             <Button buttonProperties={buttonProps} action={() => spy()} />,
         );
 
-        wrapper.find(`#${buttonProps.id}`).simulate('click');
+        const button = wrapper.find(`#${buttonProps.id}`);
+
+        button.simulate('click');
         expect(spy.calledOnce).toBe(true);
 
-        wrapper.find(`#${buttonProps.id}`).simulate('click');
+        button.simulate('click');
         expect(spy.calledTwice).toBe(true);
     });
 });

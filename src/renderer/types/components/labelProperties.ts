@@ -8,8 +8,8 @@ export enum HeaderVariants {
     p = 'p',
 }
 
-export default interface Label {
+export default interface LabelProperties {
     id: string;
     text: string;
-    variant: HeaderVariants;
+    variant: HeaderVariants | string;
 }

@@ -1,8 +1,8 @@
 import React from 'react';
-import label from '@/renderer/types/components/label';
+import labelProperties from '@/renderer/types/components/labelProperties';
 
 export interface Props {
-    label: label;
+    label: labelProperties;
     additionalText?: string;
 }
 
@@ -11,7 +11,8 @@ const Label = (props: Props) => {
     const Component = `${label.variant}` as keyof JSX.IntrinsicElements;
     return (
         <Component id={label.id}>
-            {label.text} {additionalText}
+            {label.text}
+            {additionalText}
         </Component>
     );
 };
