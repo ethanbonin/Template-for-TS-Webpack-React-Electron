@@ -9,7 +9,7 @@ import {
     ISecondPageScene,
     SecondPageScene,
 } from '@/renderer/constants/scenes/secondPageScene';
-import Header from '@/renderer/components/label/';
+import Header from '@/renderer/components/label/label';
 
 export interface Props {
     updateAvailable: boolean;

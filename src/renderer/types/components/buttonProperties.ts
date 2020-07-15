@@ -1,4 +1,4 @@
-export default interface Button {
+export default interface ButtonProperties {
     id: string;
     text: string;
     hint?: string;

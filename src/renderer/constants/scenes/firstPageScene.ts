@@ -1,7 +1,7 @@
 /** Components */
 import Image from '@/renderer/types/components/image';
 import Label, { HeaderVariants } from '@/renderer/types/components/label';
-import Button from '@/renderer/types/components/button';
+import ButtonProperties from '@/renderer/types/components/buttonProperties';
 
 /** Resources */
 import imImage from '@/renderer/resources/incept-logo-blue-text.png';
@@ -11,7 +11,7 @@ export interface IFirstPageScene {
     title: Label;
     updateLabel: Label;
     downloadLabel: Label;
-    button: Button;
+    button: ButtonProperties;
 }
 
 export const FirstPageScene: IFirstPageScene = {

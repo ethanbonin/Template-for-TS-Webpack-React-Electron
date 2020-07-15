@@ -1,11 +1,11 @@
 import Label, { HeaderVariants } from '@/renderer/types/components/label';
-import Button from '@/renderer/types/components/button';
+import ButtonProperties from '@/renderer/types/components/buttonProperties';
 
 export interface ISecondPageScene {
     title: Label;
     updateAvailable: Label;
     downloadAvailable: Label;
-    button: Button;
+    button: ButtonProperties;
 }
 
 export const SecondPageScene: ISecondPageScene = {
