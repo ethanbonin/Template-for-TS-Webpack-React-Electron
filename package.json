@@ -27,6 +27,7 @@
         "set-env": "sh .env.sh && yarn echo",
         "echo": "echo %GH_TOKEN%",
         "test": "cross-env NODE_ENV=unit jest",
+        "test:e2e": "cross-env NODE_ENV=e2e jest --testPathPattern=./tests/e2e",
         "version-increase": "yarn version --patch"
     },
     "author": "Ethan BOnin",

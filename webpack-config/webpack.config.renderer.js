@@ -9,7 +9,7 @@ function srcPaths(src) {
 }
 
 const rendererConfig = lodash.cloneDeep(commonConfig);
-rendererConfig.entry = ['./src/renderer/label.tsx'];
+rendererConfig.entry = ['./src/renderer/index.tsx'];
 rendererConfig.target = 'electron-renderer';
 rendererConfig.output.filename = 'renderer.bundle.js';
 rendererConfig.plugins = [

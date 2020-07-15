@@ -18,12 +18,12 @@ export const SecondPageScene: ISecondPageScene = {
     },
     updateAvailable: {
         id: 'update-label',
-        text: 'Update available:',
+        text: 'Update available: ',
         variant: HeaderVariants.p,
     },
     downloadAvailable: {
         id: 'download-label',
-        text: 'Download available',
+        text: 'Download available: ',
         variant: HeaderVariants.p,
     },
     button: {

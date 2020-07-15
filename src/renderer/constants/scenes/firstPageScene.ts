@@ -29,12 +29,12 @@ export const FirstPageScene: IFirstPageScene = {
     },
     updateLabel: {
         id: 'update-label',
-        text: 'Update available:',
+        text: 'Update available: ',
         variant: HeaderVariants.p,
     },
     downloadLabel: {
         id: 'download-label',
-        text: 'Download available:',
+        text: 'Download available: ',
         variant: HeaderVariants.p,
     },
     button: {
