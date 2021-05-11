@@ -85,7 +85,7 @@
         "html-webpack-plugin": "^4.3.0",
         "husky": "^4.2.5",
         "lint-staged": "^10.2.11",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.21",
         "mocha": "^8.0.1",
         "post-compile-webpack-plugin": "^0.1.2",
         "prettier": "^2.0.5",
